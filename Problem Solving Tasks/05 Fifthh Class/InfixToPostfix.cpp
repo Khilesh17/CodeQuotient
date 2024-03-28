@@ -1,6 +1,61 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+class Stack{
+    public:
+        char *arr;
+        int top;
+        int size;
+
+        Stack(int s){
+            this->size = s;
+            arr = new char[s];
+            top = -1;
+        }
+
+
+    void push(int element){
+        if(size-top > 1){
+            top++;
+            arr[top] = element;
+        }
+        else{
+            cout << "Stack is overflow" << endl;
+        }
+    }
+
+    void pop(){
+        if(top >= 0){
+            top--;
+        }
+        else{
+            cout << "Stack is underflow" << endl;
+        }
+    }
+
+    int peek(){
+        if(top >= 0){
+            return arr[top];
+        }
+        else{
+            return -1;
+        }
+
+    }
+
+    bool empty(){
+        if(top == -1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
+
+
+
 class Solution {
   public:
     int prec(char ch){
@@ -10,14 +65,15 @@ class Solution {
         else if(ch == '^') return 3;
         else return -1;
     }
-  
-    // Function to convert an infix expression to a postfix expression.
+
+    
     string infixToPostfix(string str) {
         
         string ans = "";
-        stack<char> s;
+        int size = str.size();
+        Stack s(size);
         
-        for(int i = 0; i<str.size(); i++){
+        for(int i = 0; i<size; i++){
             
             char curr = str[i];
             
@@ -36,8 +92,8 @@ class Solution {
             // case 3 : closing bracket : poping till we get opening bracket
             else if(curr == ')'){
                 
-                while(!s.empty() && s.top() != '('){
-                    ans.push_back(s.top());
+                while(!s.empty() && s.peek() != '('){
+                    ans.push_back(s.peek());
                     s.pop();
                 }
                 s.pop();
@@ -45,8 +101,8 @@ class Solution {
             // case 4 : operator : if precedence of top is greater then pop the top
             else{
                 
-                while(!s.empty() && prec(curr) <= prec(s.top())){
-                    ans.push_back(s.top());
+                while(!s.empty() && prec(curr) <= prec(s.peek())){
+                    ans.push_back(s.peek());
                     s.pop();
                 }
                 
@@ -56,7 +112,7 @@ class Solution {
         
         // in the end printing all the oprator of the stack      
         while(!s.empty()){
-            ans.push_back(s.top());
+            ans.push_back(s.peek());
             s.pop();
         }
 
