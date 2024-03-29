@@ -13,19 +13,6 @@ class Node {
         this->data = d;
         this->next = NULL;
     }
-
-    //destructor
-
-    ~Node(){
-        int value = this->data;
-        //MEMORY FREE   
-        if(this->next != NULL){
-            delete next;
-            this->next = NULL;
-        }
-
-        cout << "Memory free for " << value << endl;
-    }
 };
 
 
@@ -79,7 +66,6 @@ void insertNodeAtAnyPosition(Node* &head, Node* &tail, int position, int d){
     }
 
     //insert at last
-
     if(temp->next == NULL){
         insertNodeAtTail(head, tail, d);
         return;
