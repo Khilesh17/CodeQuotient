@@ -1,0 +1,52 @@
+[
+    {
+        "playerId": 1,
+        "name": "Khilesh",
+        "level": 99
+    },
+    {
+        "playerId": 2,
+        "name": "Nilesh",
+        "level": 33
+    },
+    {
+        "playerId": 3,
+        "name": "Badsaha",
+        "level": 999
+    },
+    {
+        "playerId": 4,
+        "name": "Raju",
+        "level": 90
+    },
+    {
+        "playerId": 5,
+        "name": "Ankesh",
+        "level": 97
+    },
+    {
+        "playerId": 6,
+        "name": "Sangam",
+        "level": 95
+    },
+    {
+        "playerId": 7,
+        "name": "bhavesh",
+        "level": 56
+    },
+    {
+        "playerId": 8,
+        "name": "Chand",
+        "level": 45
+    },
+    {
+        "playerId": 9,
+        "name": "Chotu",
+        "level": 93
+    },
+    {
+        "playerId": 10,
+        "name": "Pakku",
+        "level": 23
+    }
+]
