@@ -1,7 +1,8 @@
 const fs = require("fs").promises;
 const path = require('path');
 
-const filePath = path.join(__dirname, "data.json");
+const filePath = path.join(__dirname, "task.json");
+const allDeletedTaskFilePath = path.join(__dirname, "deletedTask.json");
 
 // Creating the routes object
 const routes = {
@@ -30,7 +31,7 @@ const routes = {
         "POST": async (req, res) => {
             try {
                 const tasks = JSON.parse(await fs.readFile(filePath, "utf-8"));
-                
+
                 const task = JSON.parse(req.body);
 
                 //if there is no task from the req for updation the failure response
@@ -39,6 +40,19 @@ const routes = {
                     res.end(JSON.stringify({
                         success: false,
                         message: "No task has been received from the request body"
+                    }));
+                    return;
+                }
+
+                //checking the task with same id exist or not
+                const id = task.id;
+                const taskIndex = tasks.findIndex((task) => task.id === id);
+
+                if (taskIndex !== -1) {
+                    res.writeHead(401, { "Content-Type": "application/json" });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "Task with same id is already exist so please provide the unique ID"
                     }));
                     return;
                 }
@@ -69,10 +83,11 @@ const routes = {
 
         "DELETE": async (req, res) => {
             try {
+                
                 const tasks = JSON.parse(await fs.readFile(filePath, "utf-8"));
-    
+
                 const { id } = JSON.parse(req.body);
-    
+
                 if (!id) {
                     res.writeHead(404, { "Content-Type": "application/json" });
                     res.end(JSON.stringify({
@@ -81,17 +96,44 @@ const routes = {
                     }));
                     return;
                 }
-    
-                // Deleting the task with specific id
+
+                //Finding the task for deletion
+                const deleteTaskIndex = tasks.findIndex((task) => task.id === id);
+
+                if (deleteTaskIndex === -1) {
+                    res.writeHead(404, { "Content-Type": "application/json" });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "Task not found"
+                    }));
+                    return;
+                }
+
+                //Now finding the deleted task and saving it into seperate file
+                const deleteTask = tasks[deleteTaskIndex];
+                console.log("Delete Task : ", deleteTask);
+                
+                //extracting all the deleted tasks
+                const allDeletedTasks = JSON.parse(await fs.readFile(allDeletedTaskFilePath, "utf-8"));
+                console.log("All Deleted task : ", allDeletedTasks);
+
+
+                //Now updating the deleted task list;
+                allDeletedTasks.push(deleteTask);
+
+                //Now updatinng the file of deleted task
+                await fs.writeFile(allDeletedTaskFilePath, JSON.stringify(allDeletedTasks));
+
+                //Now finally Updating the main list
                 const updatedTasks = tasks.filter((task) => task.id !== id);
-    
                 await fs.writeFile(filePath, JSON.stringify(updatedTasks));
-    
+
                 res.writeHead(200, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({
                     success: true,
                     message: "Task Deleted Successfully",
-                    Tasks: updatedTasks
+                    Tasks: updatedTasks,
+                    deletedTasks: allDeletedTasks
                 }));
             }
             catch (err) {
@@ -107,12 +149,12 @@ const routes = {
 
         "PUT": async (req, res) => {
             try {
-                
+
                 const tasks = JSON.parse(await fs.readFile(filePath, "utf-8"));
-    
+
                 const body = JSON.parse(req.body);
                 const { id } = body;
-    
+
                 if (!id) {
                     res.writeHead(404, { "Content-Type": "application/json" });
                     res.end(JSON.stringify({
@@ -124,7 +166,7 @@ const routes = {
 
                 const indexToChange = tasks.findIndex((task) => task.id === id);
 
-                if (indexToChange === undefined) {
+                if (indexToChange === -1) {
                     res.writeHead(404, { "Content-Type": "application/json" });
                     res.end(JSON.stringify({
                         success: false,
@@ -132,11 +174,11 @@ const routes = {
                     }));
                     return;
                 }
-    
+
                 tasks[indexToChange] = { ...tasks[indexToChange], ...body };
-    
+
                 await fs.writeFile(filePath, JSON.stringify(tasks));
-    
+
                 res.writeHead(200, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({
                     success: true,
