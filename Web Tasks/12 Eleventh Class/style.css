@@ -1,0 +1,12 @@
+nav{
+    background: lightblue;
+    width: 80vw;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+}
+
+nav>div{
+    font-size: 2rem;
+}

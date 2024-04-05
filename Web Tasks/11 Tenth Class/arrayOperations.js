@@ -1,0 +1,9 @@
+// map
+// filter
+// foreach 
+// findIndex
+// find 
+// reduce 
+// splice 
+// slice 
+// sort 
