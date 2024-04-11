@@ -254,9 +254,25 @@ refreshButton.addEventListener("click", function() {
 //.....................//
 // 1. Giving time according to level of the Problem
 // 2. Refresh Button
+// 3. Currently kis Question par hai
 
 //....................//
 // Got to learn About //
 //....................//
 // 1. clearInterval(timeInterval) => stops the setInterval with provided id
-// 2. radio.checked => check the radio box is checked or not 
+// 2. radio.checked => check the radio box is checked or not
+// 3. location.reload() => relode the page
+
+
+
+//..............//
+// Flow Diagram //
+//..............//
+
+// Select Difficulty -> Play Quiz -> Score Board
+
+// playQuiz -> next button -> laod the new Question + show the submit button
+
+// new Question Loaded -> timer will Start
+
+// Timer end -> submit button hide 
