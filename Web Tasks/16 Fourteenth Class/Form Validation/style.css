@@ -1,0 +1,53 @@
+body{
+    background-color: #333;
+    color: white;
+}
+
+.formWrapper {
+    width: 400px;
+    margin: auto;
+}
+
+#validationResult{
+    margin-top: 4rem;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #fff;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+input{
+    padding: 10px;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #777;
+    border-radius: 5px;
+    margin-right: 10px;
+    outline: none;
+    width: 250px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #777;
+}

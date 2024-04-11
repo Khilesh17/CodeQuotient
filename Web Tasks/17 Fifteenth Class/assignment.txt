@@ -1,0 +1,2 @@
+1. put request handle karni hai
+2. Use server to send static file : html file server se send karani hai

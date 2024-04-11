@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="formWrapper">
+
+        <p id="validationResult">Validation Result</p>
+
+        <form 
+            action="https://localhost:4000/submit-form" 
+            method="post"
+            id="form"
+        >
+            <div class="container">
+                <label for="name">Name</label>
+                <input type="text" id="name">
+            </div>
+
+            <div class="container">    
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="container">
+                <label for="password">Password</label>
+                <input type="text" id="password">
+            </div>
+            
+            <div class="container">
+                <label for="phoneNumber">Phone</label>
+                <input type="tel" id="phoneNumber">
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

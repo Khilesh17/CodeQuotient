@@ -1,0 +1,32 @@
+Project: Interactive Quiz Application
+
+Overview:
+Create an interactive quiz application where users can answer multiple-choice questions and get instant feedback on their answers.
+
+Requirements:
+
+HTML Structure:
+=> Define the quiz questions and multiple-choice options.
+=> Display the question to the user along with the options.
+=> Include buttons for users to submit their answers and proceed to the next question.
+
+CSS Styling:
+=> Style the application to make it visually appealing.
+=> Apply different styles for correct and incorrect answers.
+=> JavaScript Functionality:
+
+JavaScript:
+=> Implement functionality to load questions from a JavaScript object or an external JSON file.
+=> Display one question at a time and allow users to select an answer.
+=> Validate the user's answer and provide feedback (e.g., correct or incorrect).
+=> Keep track of the user's score and display it at the end of the quiz.
+
+Bonus Features:
+Timer:
+=> Add a timer to each question and automatically move to the next question when the time runs out.
+
+Randomization:
+=> Randomize the order of questions and answer options each time the quiz is started.
+
+Difficulty Levels:
+Implement different difficulty levels for questions and allow users to select a difficulty level before starting the quiz.

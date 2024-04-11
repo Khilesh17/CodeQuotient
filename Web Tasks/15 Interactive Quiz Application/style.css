@@ -1,0 +1,277 @@
+* {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --themeColor: rgba(0, 70, 67, 0.7);
+    --themeQuiz: rgba(0, 0, 0, 0.041);
+    --textColor: #004643;
+    --yellowColor: #F8C660;
+    --whiteColor: #EEEFF2;
+    --lightGreenColor: #ABD1C6;
+    --darkGreenColor: #004643;
+}
+
+body {
+    color: var(--whiteColor);
+}
+
+/* .............................*/
+/* Difficulty Container Styling */
+/* .............................*/
+
+.difficultyWrapper {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: var(--themeColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 2rem; */
+}
+
+.logoHeading {
+    position: absolute;
+    font-size: 2.5rem;
+    color: var(--textColor);
+}
+
+.logoSubheading {
+    position: absolute;
+    bottom: 28%;
+    right: 25%;
+    font-weight: 600;
+    color: var(--yellowColor);
+}
+
+
+.difficultyHeader {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+}
+
+.optionsContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+}
+
+.difficultyLabel {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    width: 200px;
+    border: 2px solid var(--lightGreenColor);
+    padding: 0.6rem 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    transition: all;
+}
+
+.difficultyLabel:hover{
+    background-color: var(--darkGreenColor);
+    color: var(--whiteColor);
+    border: 2px solid var(--darkGreenColor);
+}
+
+.difficultyRadio:checked + .difficultyLabel{
+    background-color: var(--darkGreenColor);
+    color: var(--whiteColor);
+}
+
+#startButton {
+    margin-top: 1.5rem;
+    padding: 0.7rem 3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    background-color: var(--yellowColor);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+#startButton:hover {
+    background-color: var(--whiteColor);
+    color: var(--textColor);
+}
+
+
+
+
+/* .......................*/
+/* Quiz Container Styling */
+/* .......................*/
+
+.quizWrapper {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--themeQuiz);
+    color: black;
+}
+
+#questionCount {
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#question {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    width: 60%;
+    background-color: white;
+    padding: 2rem 4rem;
+    border-radius: 1.3rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#optionsContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1rem;
+    width: 60%;
+}
+
+.options {
+    background-color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem 1.6rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.options:hover {
+    background-color: var(--lightGreenColor);
+}
+
+.checked{
+    background-color: var(--lightGreenColor);
+    color: var(--textColor);
+}
+
+#feedback {
+    margin-top: 1.5rem;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+#timer {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.7rem;
+    font-weight: bold;
+}
+
+#submitButton {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    width: 60%;
+    background-color: var(--darkGreenColor);
+    color: var(--whiteColor);
+    border: none;
+    outline: none;
+    border-radius: 0.9rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.5 ease;
+}
+
+#submitButton:hover {
+    background-color: white;
+    color: var(--textColor);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+#nextButton {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    width: 60%;
+    background-color: var(--darkGreenColor);
+    color: var(--whiteColor);
+    border: none;
+    outline: none;
+    border-radius: 0.9rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.5 ease;
+}
+
+#nextButton:hover {
+    background-color: var(--lightGreenColor);
+    color: var(--textColor);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+
+
+/* ........................*/
+/* Score Container Styling */
+/* ........................*/
+.scoreWrapper {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--themeColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#scoreHeading{
+    font-size: 2.5rem;
+}
+
+#score{
+    margin-top: 1.2rem;
+    font-size: 2rem;
+    color: var(--whiteColor);
+}
+
+#restartButton{
+    margin-top: 1.2rem;
+    padding: 0.5rem 2.3rem;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: var(--yellowColor);
+    color: var(--whiteColor);
+    transition: all 0.3s ease;
+}
+
+#restartButton:hover {
+    background-color: var(--whiteColor);
+    color: var(--textColor);
+}

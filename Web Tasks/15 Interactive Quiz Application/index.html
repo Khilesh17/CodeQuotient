@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Khelo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Selecting Difficulty Level -->
+        <div id="difficultySelector">
+            <div class="difficultyWrapper">
+
+
+                <div class="logoContainer">
+                    <img src="./asset/circle.png" alt="circle">
+
+                    <p class="logoHeading">Quiz</p>
+                    <p class="logoSubheading">Khelo</p>
+                </div>
+
+                <h1 class="difficultyHeader">Select Difficulty Level</h1>
+
+                <div class="optionsContainer">
+                    <label class="difficultyLabel">
+                        Easy
+                        <input type="radio" name="difficulty" value="easy" class="difficultyRadio">
+                    </label>
+                    <label class="difficultyLabel">
+                        Medium
+                        <input type="radio" name="difficulty" value="medium" class="difficultyRadio">
+                    </label>
+                    <label class="difficultyLabel">
+                        Hard
+                        <input type="radio" name="difficulty" value="hard" class="difficultyRadio">
+                    </label>
+                </div>
+
+                <button id="startButton">Start Quiz</button>
+            </div>
+        </div>
+
+
+        <!-- Quiz Part -->
+        <div id="quizContainer" style="display: none;">
+            <div class="quizWrapper">
+                <div id="questionCount"></div>
+                <div id="question"></div>
+                <div id="optionsContainer"></div>
+                <div id="feedback"></div>
+                <div id="timer"></div>
+                <button id="submitButton">Submit Answer</button>
+                <button id="nextButton" style="display: none;">Next</button>
+            </div>
+        </div>
+
+
+        <!-- Score  -->
+        <div id="scoreContainer" style="display: none;">
+            <div class="scoreWrapper">
+                <div id="scoreHeading">Your Score</div>
+                <div id="score"></div>
+                <button id="restartButton">Restart</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="questions.js"></script>
+
+</body>
+
+</html>
