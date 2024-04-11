@@ -44,6 +44,13 @@ function startQuizHandler() {
         }
     })
 
+    //Validation
+    if (selectedDifficulty === '') {
+        alert("First Select the Difficulty Level");
+        return;
+    }
+
+
     //Step 2 : Hiding the difficulty Container
     difficultySelectorContainer.style.display = 'none';
 
@@ -168,6 +175,11 @@ function submitAnswerHandler() {
             selectedOption = option.value;
         }
     })
+
+    if (selectedOption === "") {
+        alert("First Select any one option then you can Submit");
+        return;
+    }
 
     //Step 3 : Now comparing the correct ans and selected ans
     const correctAnswer = selectedQuestions[currentQuestionIndex].answer;
