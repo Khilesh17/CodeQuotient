@@ -18,7 +18,7 @@ const scoreContainer = document.getElementById("scoreContainer");
 const scoreElement = document.getElementById('score');
 const refreshButton = document.getElementById("restartButton");
 
-const selectedQuestions = [];
+let selectedQuestions = [];
 let currentQuestionIndex = 0;
 let selectedDifficulty = '';
 let score = 0;  
@@ -30,6 +30,66 @@ const timeGivenForSolvingEasyQuestion = 15;
 const timeGivenForSolvingMediumQuestion = 20;
 const timeGivenForSolvingHardQuestion = 30;
 const numberOfQuestionsWantToShow = 5;
+
+
+//......//
+// Flow //
+//......//
+
+// Step 1 : check karege local storage me
+// Step 2 : if Questions State Present then load
+// Step 3 : Not prtesent the restart the Quiz
+
+// How we are going to store the Current state of the quiz
+// 1. After clicking the Next Button -> update the score
+// 2. After Clicking the submit button -> new Question will load -> save curr Question index
+
+
+window.onload = function () {
+
+    clearInterval(timeInterval);
+
+    //Step 1 : check local storage for quiz state 
+    const quizState = localStorage.getItem('quizState');
+    const QuestionsForLocalStorage = localStorage.getItem('QuestionsForLocalStorage');
+
+    // console.log("Quiz Data : ", quizState);
+
+    //Step 2 : if present then load that data 
+    if (quizState) {
+        const state = JSON.parse(quizState);
+        const localQuestion = JSON.parse(QuestionsForLocalStorage);
+
+        // console.log("Local storage all Question : ", localQuestion);
+
+        currentQuestionIndex = state.currentQuestionIndex;
+        selectedDifficulty = state.selectedDifficulty;
+        score = state.score;
+        selectedQuestions = localQuestion.questions;
+
+        // console.log("currentQuestionIndex : ", currentQuestionIndex);
+        console.log("Selected Question : ", selectedQuestions);
+
+        difficultySelectorContainer.style.display = 'none';
+        quizContainer.style.display = 'block';
+
+
+        loadQuestion();
+        setTimeInSeconds();
+        startTimer();
+    }
+};
+
+
+// Jab question is answered or the timer is updated then saving the state
+function saveQuizState() {
+    const quizState = {
+        currentQuestionIndex: currentQuestionIndex,
+        selectedDifficulty: selectedDifficulty,
+        score: score,
+    };
+    localStorage.setItem('quizState', JSON.stringify(quizState));
+}
 
 
 //............//
@@ -59,6 +119,16 @@ function startQuizHandler() {
 
     //Added Additional Functionality
     //Giving time according to level of the Problem
+    setTimeInSeconds();
+
+    //Step 4 : loading the question
+    getRandomQuestions();
+    loadQuestion();
+
+    console.log("Selected Difficulty : ", selectedDifficulty);
+}
+
+function setTimeInSeconds() {
     if (selectedDifficulty === "easy") {
         timeGivenForSolvingQuestion = timeGivenForSolvingEasyQuestion;
     }
@@ -68,12 +138,6 @@ function startQuizHandler() {
     else if (selectedDifficulty === "hard") {
         timeGivenForSolvingQuestion = timeGivenForSolvingHardQuestion;
     }
-
-    //Step 4 : loading the question
-    getRandomQuestions();
-    loadQuestion();
-
-    console.log("Selected Difficulty : ", selectedDifficulty);
 }
 
 //Fetching 10 random questions of selected difficulty
@@ -94,7 +158,11 @@ function getRandomQuestions() {
         questionsOfSelectedDifficulty.splice(randomIndex, 1);
     }
 
-    console.log("Selected Question : ", selectedQuestions);
+    // console.log("Selected Question : ", selectedQuestions);
+    const QuestionsForLocalStorage = {
+        questions: selectedQuestions
+    };
+    localStorage.setItem('QuestionsForLocalStorage', JSON.stringify(QuestionsForLocalStorage));
 }
 
 //Loadinng the question one by one
@@ -200,6 +268,10 @@ function submitAnswerHandler() {
     nextButton.style.display = 'block';
     clearInterval(timeInterval);
     timerElement.textContent = '';
+
+
+    //TODO: submit krne ke baad State save kardege quiz ki
+    saveQuizState();
 }
 
 //...............//
@@ -209,6 +281,9 @@ function nextQuestionHandler() {
     currentQuestionIndex++;
     if (currentQuestionIndex < selectedQuestions.length) {
         loadQuestion();
+
+        //TODO: After loading also save the state bcz we have to know which question we are currently in it
+        saveQuizState();
     }
     else {
         endQuiz();
@@ -222,12 +297,18 @@ function endQuiz() {
     scoreElement.textContent = `${score} out of ${selectedQuestions.length}`;
     quizContainer.style.display = 'none';
     scoreContainer.style.display = 'block';
+
+    //TODO: Clearing the Local storage.
+    localStorage.removeItem('quizState');
+    localStorage.removeItem('QuestionsForLocalStorage');
+    
 }
 
 //.......//
 // Timer //
 //.......//
 function startTimer() {
+    // clearInterval(timeInterval);
     let timeLeft = timeGivenForSolvingQuestion;
 
     timeInterval = setInterval(() => {
@@ -261,12 +342,19 @@ refreshButton.addEventListener("click", function() {
     location.reload(); // Reloads the page
 });
 
+
 //.....................//
 // Additional Features //
 //.....................//
 // 1. Giving time according to level of the Problem
 // 2. Refresh Button
 // 3. Currently kis Question par hai
+// 4. If page is refreshed in between the quiz then we have to restart the same question 
+// 5. Also the timer
+
+
+
+
 
 //....................//
 // Got to learn About //
